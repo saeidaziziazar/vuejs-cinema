@@ -1,7 +1,7 @@
 <template>
     <div id="movie-list">
         <div v-if="filteredMovies.length">
-            <movie-item v-for="movie in filteredMovies" class="movie" v-bind:key="movie.id" v-bind:movie="movie.movie"></movie-item>
+            <movie-item v-for="movie in filteredMovies" class="movie" v-bind:key="movie.id" v-bind:movie="movie.movie" v-bind:sessions="movie.sessions"></movie-item>
         </div>
         <div v-else-if="movies.length">
             No Resualt
@@ -38,9 +38,6 @@
                 return this.movies.filter(this.moviePassesGenreFilter);
             }
         },
-        created() {
-            console.log(this.$moment);
-        }
     }
 </script>
 <style>
