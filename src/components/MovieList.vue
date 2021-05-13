@@ -1,10 +1,10 @@
 <template>
     <div id="movie-list">
         <div v-if="filteredMovies.length">
-            <movie-item v-for="movie in filteredMovies" class="movie" v-bind:key="movie.id" v-bind:movie="movie.movie" v-bind:sessions="movie.sessions" v-bind:day="day"></movie-item>
+            <movie-item v-for="movie in filteredMovies" class="movie" v-bind:key="movie.id" v-bind:movie="movie.movie" v-bind:sessions="movie.sessions" v-bind:day="day" v-bind:time="time"></movie-item>
         </div>
         <div v-else-if="movies.length">
-            No Resualt
+            {{ noResualt }}
         </div>
         <div v-else>
             Loading . . .
@@ -50,6 +50,12 @@
             filteredMovies() {
                 return this.movies.filter(this.moviePassesGenreFilter)
                                   .filter(movie => movie.sessions.find(this.sessionPassesTimeFilter));
+            },
+
+            noResualt() {
+                let times = this.time.join(', ');
+                let genres = this.genre.join(', ')
+                return `No Results for ${times}${times.length && genres.length ? ', ' : ''}${genres}`;
             }
         },
     }
